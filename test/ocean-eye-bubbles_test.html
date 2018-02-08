@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>ocean-eye-bubbles test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../ocean-eye-bubbles.html">
+  </head>
+  <body>
+
+    <test-fixture id="Basic">
+      <template>
+        <ocean-eye-bubbles></ocean-eye-bubbles>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="AudioControl">
+      <template>
+        <ocean-eye-bubbles
+            voicelistener
+            voicelistener-api-key="my-key"></ocean-eye-bubbles>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('ocean-eye-bubbles', () => {
+
+        let audioSelector;
+
+        setup(() => {
+          audioSelector = 'ocean-eye-bubbles-audio'
+        })
+
+        test('instantiating the element with default properties works', () => {
+          const element = fixture('Basic');
+          assert.equal(element.voicelistener, false);
+          assert.equal(element.voicelistenerApiKey, '');
+          assert.equal(typeof element.dictionary, 'object');
+          assert.equal(element.dictionary.length, 0);
+        });
+
+        test('setting voicelistener show google voice-button controls', (done) => {
+          const element = fixture('AudioControl');
+          assert.equal(element.voicelistener, true);
+          flush(function() {
+            const voiceButtons = element.shadowRoot.querySelectorAll(audioSelector);
+            assert.equal(voiceButtons.length, 1);
+            done();
+          });
+        });
+
+        test('voicelistener-api-key should be available and reflect as attribute and property', (done) => {
+          const element = fixture('AudioControl');
+          assert.equal(element.voicelistenerApiKey, 'my-key');
+          assert.equal(element.getAttribute('voicelistener-api-key'), 'my-key');
+          flush(function() {
+            const voiceButton = element.shadowRoot.querySelector(audioSelector);
+            assert.equal(voiceButton.apiKey, 'my-key');
+            done();
+          });
+        });
+
+        test('setting dictionary reflects to ocean-eye-bubbles-audio dictionary', (done) => {
+          const element = fixture('AudioControl');
+          element.dictionary = [
+            {
+              trigger: 'marketing view',
+              event: 'marketing-view',
+              answer: 'Showing the marketing view'
+            },
+            {
+              trigger: 'vision',
+              event: 'vision-view',
+              answer: 'Showing the vision of the startup idea'
+            }
+          ];
+          flush(() => {
+            const audioElement = element.shadowRoot.querySelector(audioSelector);
+            assert.equal(element.dictionary.length, audioElement.dictionary.length);
+            assert.equal(audioElement.dictionary[1].trigger, 'vision');
+            done();
+          });
+        });
+
+      });
+    </script>
+
+  </body>
+</html>

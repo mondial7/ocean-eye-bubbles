@@ -1,0 +1,17 @@
+{
+  "name": "ocean-eye-bubbles",
+  "description": "Dashboard wrapper element for Startup Radiator project",
+  "main": "ocean-eye-bubbles.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "ocean-eye-bubbles-audio": "mondial7/ocean-eye-bubbles-audio#^1.0.0"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  }
+}

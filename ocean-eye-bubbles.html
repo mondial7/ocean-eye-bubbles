@@ -1,0 +1,80 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/dom-if.html">
+<link rel="import" href="../ocean-eye-bubbles-audio/ocean-eye-bubbles-audio.html">
+
+<dom-module id="ocean-eye-bubbles">
+  <template strip-whitespace>
+    <style>
+      :host {
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 15px;
+        background-color: #f2f2f2;
+        text-align: center;
+      }
+      ::slotted(ocean-eye-bubble) {
+        position: relative;
+        z-index: 1;
+      }
+      ocean-eye-bubbles-audio {
+        position: relative;
+        z-index: 2;
+      }
+    </style>
+    <slot><!-- TODO set a fallback content with a single empty ocean-eye-bubble --></slot>
+    <template is="dom-if" if="[[voicelistener]]">
+      <ocean-eye-bubbles-audio
+          dictionary="{{dictionary}}"
+          api-key="[[voicelistenerApiKey]]"></ocean-eye-bubbles-audio>
+    </template>
+  </template>
+
+  <script>
+    /**
+     * `ocean-eye-bubbles`
+     * Dashboard element for Startup Radiator project
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class OceanEyeBubbles extends Polymer.Element {
+      static get is() { return 'ocean-eye-bubbles' }
+      static get properties() {
+        return {
+          /**
+           * Whether audio listener button should be in place working or not
+           */
+          voicelistener: {
+            type: Boolean,
+            reflectToAttribute: true,
+            value: false
+          },
+          /**
+           * Audio listener cloud-speech-api-key
+           * as required by obvi/voice-button component
+           * initialized as empty
+           */
+          voicelistenerApiKey: {
+            type: String,
+            reflectToAttribute: true,
+            value: ''
+          },
+          /**
+           * Dictionary used for ocean-eye-bubbles-audio
+           */
+          dictionary: {
+            type: Array,
+            notify: true,
+            reflectToAttribute: true,
+            value: () => []
+          },
+        }
+      }
+    }
+
+    window.customElements.define(OceanEyeBubbles.is, OceanEyeBubbles);
+  </script>
+</dom-module>
