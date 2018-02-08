@@ -25,6 +25,35 @@
           <ocean-eye-bubbles voicelistener></ocean-eye-bubbles>
         </template>
       </demo-snippet>
+      <h3>Complete ocean-eye-bubbles demo</h3>
+      <demo-snippet>
+        <template>
+          <style>
+            #demo2 {
+              --voicelister-button-position: center;
+            }
+          </style>
+          <ocean-eye-bubbles
+              id="demo2"
+              voicelistener
+              voicelistener-api-key="your-cloud-speech-api-key"
+          ><!-- Fill with bubbles! --></ocean-eye-bubbles>
+          <script>
+            document.querySelector('#demo2').dictionary = [
+              {
+                trigger: 'marketing view',
+                event: 'marketing-view',
+                answer: 'Showing the marketing view'
+              },
+              {
+                trigger: 'vision',
+                event: 'vision-view',
+                answer: 'Showing the vision of the startup idea'
+              }
+            ]
+          </script>
+        </template>
+      </demo-snippet>
     </div>
   </body>
 </html>

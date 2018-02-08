@@ -1,21 +1,19 @@
 # \<ocean-eye-bubbles\>
 
-Dashboard element for Startup Radiator project
+Dashboard wrapper element for Startup Radiator project
 
-## Install the Polymer-CLI
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/mondial7/ocean-eye-bubbles)
 
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
-
-## Viewing Your Element
-
+<!--
 ```
-$ polymer serve
+<custom-element-demo>
+  <template>
+    <link rel="import" href="ocean-eye-bubbles.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
 ```
-
-## Running Tests
-
+-->
+```html
+<ocean-eye-bubbles voicelistener><!-- Fill with bubbles! --></ocean-eye-bubbles>
 ```
-$ polymer test
-```
-
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
